@@ -20,7 +20,7 @@ void setup()
   }
 }
 
-long distance = 0;
+float distance = 0;
 
 void loop()
 {
@@ -36,9 +36,9 @@ void loop()
     Serial.print(speedMPH);
     Serial.print(F(" (mph)"));
     
-    distance = int(distance + (speed / 3600)); // distance is equal to the old distance plus the new speed/seconds in an hour
+    distance = distance + (speed / 3600); // distance is equal to the old distance plus the new speed/seconds in an hour
     
-    if ((distance % int(.01)) = 0) { // should happen every 10th of a mile
+    if ((distance % .01) == 0) { // should happen every 10th of a mile
       Serial.print(F(" Odometer: "));
       Serial.print(distance);
     }
