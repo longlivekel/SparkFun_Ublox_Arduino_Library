@@ -65,9 +65,10 @@ void loop()
     Serial.print(longitude);
 
     long speed = myGPS.getGroundSpeed();
+    long speedMPH = (speed * 0.00223694);
     Serial.print(F(" Speed: "));
-    Serial.print(speed);
-    Serial.print(F(" (mm/s)"));
+    Serial.print(speedMPH);
+    Serial.print(F(" (mph)"));
 
     long heading = myGPS.getHeading();
     Serial.print(F(" Heading: "));
