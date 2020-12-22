@@ -34,7 +34,7 @@ void loop()
   {
     lastTime = millis(); // Update the timer
     
-    long speed = random(min, max)
+    long speed = myGPS.getGroundSpeed();
     float speedMPH = (speed * 0.00223694);
     // distance is equal to the old distance plus the new speed / (polls per second * seconds in an hour)
     distance = distance + (speedMPH / (pollsPerSecond * (60 * 60))); 
@@ -50,7 +50,7 @@ void loop()
     Serial.print(distance, 6);
     Serial.print(F(" Miles"));
     // every 10th of a mile we change/write the odometer
-    if (distance >= (odo + .1)) {
+    if (distance >= (odo + .01)) {
       odo = distance;    
       Serial.print(F(" | Odometer: "));
       Serial.print(odo, 1);
