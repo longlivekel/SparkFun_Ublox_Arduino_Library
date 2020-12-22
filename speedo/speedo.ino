@@ -24,17 +24,19 @@ float distance = 0;
 
 float odo = 0;
 
+int pollSpeed = 250;
+
 void loop()
 {
   //Query module only every second. Doing it more often will just cause I2C traffic.
   //The module only responds when a new position is available
-  if (millis() - lastTime > 1000)
+  if (millis() - lastTime > pollSpeed)
   {
     lastTime = millis(); //Update the timer
     
     long speed = random(min, max)
     float speedMPH = (speed * 0.00223694);
-    distance = distance + (speedMPH / 3600); // distance is equal to the old distance plus the new speed/seconds in an hour
+    distance = distance + (speedMPH / ((1000 / pollSpeed) * (60 * 60))); // distance is equal to the old distance plus the new speed/seconds in an hour
     
     Serial.print(F(" Speed: "));
     Serial.print(speedMPH);
