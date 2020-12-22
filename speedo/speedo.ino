@@ -31,7 +31,7 @@ void loop()
     lastTime = millis(); //Update the timer
     
     long speed = myGPS.getGroundSpeed();
-    long speedMPH = (speed * 0.00223694);
+    float speedMPH = (speed * 0.00223694);
     distance = distance + (speedMPH / 3600); // distance is equal to the old distance plus the new speed/seconds in an hour
     
     Serial.print(F(" Speed: "));
