@@ -38,6 +38,10 @@ void loop()
     float speedMPH = (speed * 0.00223694);
     // distance is equal to the old distance plus the new speed / (polls per second * seconds in an hour)
     distance = distance + (speedMPH / (pollsPerSecond * (60 * 60))); 
+
+    //TEMP TODO: write speedMPH to the LCD
+
+    //TODO: map the speedMPH to the stepper position
     
     Serial.print(F(" Speed: "));
     Serial.print(speedMPH);
@@ -45,13 +49,17 @@ void loop()
     Serial.print(F(" Distance: "));
     Serial.print(distance, 6);
     Serial.print(F(" Miles"));
-    // every 10th of a mile
+    // every 10th of a mile we change/write the odometer
     if (distance >= (odo + .1)) {
       odo = distance;    
       Serial.print(F(" | Odometer: "));
       Serial.print(odo, 1);
+
       // TODO: write odo to memory
-      // This will have the disadvantage of losing up to .09 when you shut the car off
+
+      // TODO: write odo to LCD
+
+      // NOTE: This will have the disadvantage of losing up to .09 when you shut the car off
     }
 
     Serial.println();
