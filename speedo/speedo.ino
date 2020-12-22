@@ -35,7 +35,7 @@ void loop()
     lastTime = millis(); // Update the timer
     
     long speed = myGPS.getGroundSpeed();
-    float speedMPH = (speed * 0.00223694);
+    long speedMPH = (speed * 0.00223694);
     // distance is equal to the old distance plus the new speed / (polls per second * seconds in an hour)
     distance = distance + (speedMPH / (pollsPerSecond * (60 * 60))); 
 
