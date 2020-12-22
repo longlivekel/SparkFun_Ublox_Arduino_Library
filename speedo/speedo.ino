@@ -5,8 +5,15 @@ SFE_UBLOX_GPS myGPS;
 
 #include <Adafruit_GFX.h>  // Include core graphics library for the display.
 #include <Adafruit_SSD1306.h>  // Include Adafruit_SSD1306 library to drive the display.
-Adafruit_SSD1306 display(128, 32);  // Create display.
-#include <Fonts/FreeMonoBold18pt7b.h>  // Add a custom font.
+
+//----Define OLED Display Settings------
+#define OLED_RESET 4
+Adafruit_SSD1306 display(OLED_RESET);
+#define NUMFLAKES 10
+#define XPOS 0
+#define YPOS 1
+#define DELTAY 2
+//-----End OLED Display Settings--------
 
 long lastTime = 0; //Simple local timer. Limits amount if I2C traffic to Ublox module.
 
