@@ -36,7 +36,7 @@ void loop()
     Serial.print(speedMPH);
     Serial.print(F(" (mph)"));
     
-    distance = distance + (speed / 3600); // distance is equal to the old distance plus the new speed/seconds in an hour
+    distance = distance + (speedMPH / 3600); // distance is equal to the old distance plus the new speed/seconds in an hour
     
     if (double fmod(distance, .01) == 0) { // should happen every 10th of a mile
       Serial.print(F(" Odometer: "));
