@@ -24,20 +24,18 @@ float distance = 0;
 
 float odo = 0;
 
-int pollsPerSecond = 2;
-
 void loop()
 {
   //Query module only every second. Doing it more often will just cause I2C traffic.
   //The module only responds when a new position is available
-  if (millis() - lastTime > (1000 / pollsPerSecond))
+  if (millis() - lastTime > (1000))
   {
     lastTime = millis(); // Update the timer
     
     long speed = myGPS.getGroundSpeed();
     float speedMPH = (speed * 0.00223694);
     // distance is equal to the old distance plus the new speed / (polls per second * seconds in an hour)
-    distance = speedMPH >= 0.5 ? distance + (speedMPH / (pollsPerSecond * (60 * 60))) : distance;
+    distance = speedMPH >= 0.5 ? distance + (speedMPH / (60 * 60)) : distance;
 
     //TEMP TODO: write speedMPH to the LCD
 
@@ -50,7 +48,7 @@ void loop()
     Serial.print(distance, 6);
     Serial.print(F(" Miles"));
     // every 10th of a mile we change/write the odometer
-    if (distance >= (odo + .01)) {
+    if (distance >= (odo + .1)) {
       odo = distance;    
       Serial.print(F(" | Odometer: "));
       Serial.print(odo, 1);
