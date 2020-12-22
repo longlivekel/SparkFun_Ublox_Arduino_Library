@@ -24,7 +24,7 @@ float distance = 0;
 
 float odo = 0;
 
-int pollsPerSecond = 4;
+int pollsPerSecond = 2;
 
 void loop()
 {
