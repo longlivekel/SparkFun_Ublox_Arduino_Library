@@ -24,31 +24,34 @@ float distance = 0;
 
 float odo = 0;
 
-int pollSpeed = 250;
+int pollsPerSecond = 4;
 
 void loop()
 {
   //Query module only every second. Doing it more often will just cause I2C traffic.
   //The module only responds when a new position is available
-  if (millis() - lastTime > pollSpeed)
+  if (millis() - lastTime > (1000 / pollsPerSecond))
   {
-    lastTime = millis(); //Update the timer
+    lastTime = millis(); // Update the timer
     
     long speed = random(min, max)
     float speedMPH = (speed * 0.00223694);
-    distance = distance + (speedMPH / ((1000 / pollSpeed) * (60 * 60))); // distance is equal to the old distance plus the new speed/seconds in an hour
+    // distance is equal to the old distance plus the new speed / (polls per second * seconds in an hour)
+    distance = distance + (speedMPH / (pollsPerSecond * (60 * 60))); 
     
     Serial.print(F(" Speed: "));
     Serial.print(speedMPH);
     Serial.print(F(" (mph)"));
     Serial.print(F(" Distance: "));
     Serial.print(distance, 6);
-    Serial.print(F(" Miles "));
+    Serial.print(F(" Miles"));
     // every 10th of a mile
     if (distance >= (odo + .1)) {
       odo = distance;    
       Serial.print(F(" | Odometer: "));
       Serial.print(odo, 1);
+      // TODO: write odo to memory
+      // This will have the disadvantage of losing up to .09 when you shut the car off
     }
 
     
