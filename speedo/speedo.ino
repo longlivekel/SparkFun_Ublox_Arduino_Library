@@ -54,10 +54,6 @@ void loop()
       // This will have the disadvantage of losing up to .09 when you shut the car off
     }
 
-    
-    
-
-
     Serial.println();
   }
 }
