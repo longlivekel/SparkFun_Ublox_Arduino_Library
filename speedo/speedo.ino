@@ -21,6 +21,7 @@ long lastTime = 0; //Simple local timer. Limits amount if I2C traffic to Ublox m
 void setup()
 {
   Serial.begin(115200);
+  display.begin(SSD1306_SWITCHCAPVCC); //Intialise OLED
   while (!Serial); //Wait for user to open terminal
   Serial.println("Kel's Speedometer");
 
@@ -80,12 +81,12 @@ void loop()
       // TODO: write odo to memory
 
       // TODO: write odo to LCD
-        display.setTextSize(3);
-        display.setTextColor(WHITE);
-        display.clearDisplay();
+        // display.setTextSize(3);
+        // display.setTextColor(WHITE);
+        // display.clearDisplay();
         
-        display.setCursor(0,10);
-        display.println(odo, 1);
+        // display.setCursor(0,10);
+        // display.println(odo, 1);
 
 
       // NOTE: This will have the disadvantage of losing up to .09 when you shut the car off
