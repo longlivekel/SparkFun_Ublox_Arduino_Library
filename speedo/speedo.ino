@@ -3,21 +3,20 @@
 #include "SparkFun_Ublox_Arduino_Library.h" //http://librarymanager/All#SparkFun_Ublox_GPS
 SFE_UBLOX_GPS myGPS;
 
-// #include <Adafruit_GFX.h>  // Include core graphics library for the display.
-// #include <Adafruit_SSD1306.h>  // Include Adafruit_SSD1306 library to drive the display.
+#include <Adafruit_GFX.h>  // Include core graphics library for the display.
+#include <Adafruit_SSD1306.h>  // Include Adafruit_SSD1306 library to drive the display.
 
 //----Define OLED Display Settings------
-// #define OLED_RESET 4
-// Adafruit_SSD1306 display(OLED_RESET);
-// #define NUMFLAKES 10
-// #define XPOS 0
-// #define YPOS 1
-// #define DELTAY 2
+#define OLED_RESET 4
+Adafruit_SSD1306 display(OLED_RESET);
+#define NUMFLAKES 10
+#define XPOS 0
+#define YPOS 1
+#define DELTAY 2
 //-----End OLED Display Settings--------
 
 long lastTime = 0; //Simple local timer. Limits amount if I2C traffic to Ublox module.
 
-int address_sensor1= 72; //binary equivalent is 1001000
 
 void setup()
 {
@@ -27,19 +26,15 @@ void setup()
 
   Wire.begin();
 
-  byte oldAddress = 0x42; //The default address for Ublox modules is 0x42
-  byte newAddress = 0x3F; //Address you want to change to. Valid is 0x08 to 0x77.
-
-
-  // display.clearDisplay();
-  // display.setTextColor(WHITE);
-  // display.setTextSize(3);
-  // display.setCursor(20,10);
-  // display.println("CAROL"); 
-  // display.display();
-  // delay(2000);
-  // display.clearDisplay();
-  // display.display();
+  display.clearDisplay();
+  display.setTextColor(WHITE);
+  display.setTextSize(3);
+  display.setCursor(20,10);
+  display.println("CAROL"); 
+  display.display();
+  delay(2000);
+  display.clearDisplay();
+  display.display();
 
   if (myGPS.begin(Wire, 0x3F) == false) //Connect to the Ublox module using Wire port
   {
@@ -85,12 +80,12 @@ void loop()
       // TODO: write odo to memory
 
       // TODO: write odo to LCD
-        // display.setTextSize(3);
-        // display.setTextColor(WHITE);
-        // display.clearDisplay();
+        display.setTextSize(3);
+        display.setTextColor(WHITE);
+        display.clearDisplay();
         
-        // display.setCursor(0,10);
-        // display.println(odo, 1);
+        display.setCursor(0,10);
+        display.println(odo, 1);
 
 
       // NOTE: This will have the disadvantage of losing up to .09 when you shut the car off
