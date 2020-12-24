@@ -17,6 +17,8 @@ SFE_UBLOX_GPS myGPS;
 
 long lastTime = 0; //Simple local timer. Limits amount if I2C traffic to Ublox module.
 
+int address_sensor1= 72; //binary equivalent is 1001000
+
 void setup()
 {
   Serial.begin(115200);
@@ -24,6 +26,9 @@ void setup()
   Serial.println("Kel's Speedometer");
 
   Wire.begin();
+
+  byte oldAddress = 0x42; //The default address for Ublox modules is 0x42
+  byte newAddress = 0x3F; //Address you want to change to. Valid is 0x08 to 0x77.
 
 
   // display.clearDisplay();
@@ -36,7 +41,7 @@ void setup()
   // display.clearDisplay();
   // display.display();
 
-  if (myGPS.begin() == false) //Connect to the Ublox module using Wire port
+  if (myGPS.begin(Wire, 0x3F) == false) //Connect to the Ublox module using Wire port
   {
     Serial.println(F("Ublox GPS not detected at default I2C address. Please check wiring. Freezing."));
     while (1);
@@ -49,6 +54,7 @@ float odo = 0;
 
 void loop()
 {
+
   //Query module only every second. Doing it more often will just cause I2C traffic.
   //The module only responds when a new position is available
   if (millis() - lastTime > (1000))
