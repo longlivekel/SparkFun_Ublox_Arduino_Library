@@ -81,12 +81,12 @@ void loop()
     float speedMPH = (speed * 0.00223694);
     // distance is equal to the old distance plus the new speed / (polls per second * seconds in an hour)
     distance = speedMPH >= 0.5 ? distance + (speedMPH / (60 * 60)) : distance;
-    motorStep = MphToStep(speedMPH);
 
     //TEMP TODO: write speedMPH to the LCD
 
-    //TODO: map the speedMPH to the stepper position
-
+    //map the speedMPH to the stepper position
+    //motorStep = MphToStep(speedMPH);
+    motorStep = MphToStep(60);
     Motor.setPosition(motorStep);
 
     Serial.print(F(" Speed: "));
